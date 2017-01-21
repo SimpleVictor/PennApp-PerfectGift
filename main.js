@@ -5,7 +5,7 @@
 // @require      http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js
 // @require      https://www.gstatic.com/firebasejs/3.6.3/firebase.js
 // @require      http://localhost:3000/AnimationFunctions.js?sdf
-// @require      http://localhost:3000/ProfileSearch.js?ddasd
+// @require      http://localhost:3000/ProfileSearch.js?ddddvdfv
 // @description  try to take over the world!
 // @author       You
 //@run-at        document-start
@@ -52,10 +52,13 @@ function SetUpGlobalVariables(){
     FBLeftBox = $("._1vc-");
     FBRightBox = $("._5nb8");
 
+    var wordCheck = function(){
+        console.log("This is the callback function from the main script");
+    }
 
     // AnimateAllComponentsOut();  // => Animate all the main components away
     // GetEntireData(); // => Function to navigate to the about's page
-    StartSearching();
+    StartSearching(wordCheck);
 
 }
 
