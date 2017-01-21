@@ -10,23 +10,18 @@
 
 //REMINDERS     REMINDERS       REMINDERS       REMINDERS       REMINDERS       REMINDERS//
 
-
-
 var ProfileObject = {};
 var SearchingFinished = {
     BasicInfo: false,
-    RecentPosts: false
+    RecentPosts: false,
+    UsersPhoto: false
 };
 
-
 var StartSearching = function(callback){
-    console.log(maybe);
-
-
 
     //WHEN EVERYTHING IS DONE
     function CheckIfDone(){
-        if(SearchingFinished.BasicInfo === true && SearchingFinished.RecentPosts === true){
+        if(SearchingFinished.BasicInfo === true && SearchingFinished.RecentPosts === true && SearchingFinished.UsersPhoto === true){
             console.log("FINISHED...");
             callback(ProfileObject);
         }
@@ -34,6 +29,7 @@ var StartSearching = function(callback){
     //Have each function callback the Checker Function when it's done
     GrabBasicInfo(CheckIfDone);
     GrabUsersRecentPost(CheckIfDone);
+    GrabUsersPhoto(CheckIfDone);
 
 };
 
@@ -113,8 +109,6 @@ var GrabUsersRecentPost= function(callback){
 
         var PhotoElement = $(".uiScaledImageContainer._517g");
         var VideoElement = $("._ox1._1_d1");
-        // console.log(".......................................");
-        // console.log(".......................................");
 
 
         var CheckIfShared = function(str){
@@ -134,7 +128,7 @@ var GrabUsersRecentPost= function(callback){
                 console.log("From Shared : " + currentSrc);
             }else{
                 if(currentSrc === ""){
-                    console.log(VideoElement[i]);
+                    console.log($(VideoElement[i]));
                 }
                 console.log("From Personal : " + currentSrc);
             }
@@ -149,7 +143,7 @@ var GrabUsersRecentPost= function(callback){
                 console.log("From Shared : " + currentSrc);
             }else{
                 if(currentSrc === ""){
-                    console.log(PhotoElement[i].children[0]);
+                    console.log($(PhotoElement[i].children[0]));
                 }
                 console.log("From Personal : " + currentSrc);
             }
@@ -210,7 +204,23 @@ var GrabUsersRecentPost= function(callback){
 
 }
 
-var GrabUsersPhoto = function(){
+var GrabUsersPhoto = function(callback){
+
+    var PersonalPhotoContainer = $$(".uiGrid._51mz._1m6c"); // ==> Element
+    var PhotoRows = $$(".uiGrid._51mz._1m6c")[0].children[0].children;  // ==> Array
+    var photoList = [];
+
+    for(i = 0; i < PhotoRows.length; i++){
+
+        for(b = 0; b < PhotoRows[i].children.length; b++){
+            var currentSrc = PhotoRows[i].children[b].children[0].children[0].children[0].currentSrc;
+            photoList.push(currentSrc);
+        }
+    }
+
+    ProfileObject.users_photo = photoList;
+    SearchingFinished.UsersPhoto = true;
+    callback()
 
 }
 

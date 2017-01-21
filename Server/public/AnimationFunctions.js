@@ -1,5 +1,5 @@
 
-var ExternalScript1 = "Script 1 has been loaded";
+var ExternalScript1 = "AnimationFunctions.js has been loaded";
 
 //Reverse Animation
 var ReverseElementAnimation = function(elem){
@@ -23,7 +23,7 @@ var AnimateAllBoxComponentsOut = function(elems, callback){
         ReverseRightBox;
     var Animate = {
         ChatBox: function(elem){// => .fbChatSidebar
-            ReverseChatBox = TweenMax.to(elem, 0.5, {right: "-21%", ease: Circ.easeOut});
+            ReverseChatBox = TweenMax.to(elem, 1, {right: "-21%", ease: Circ.easeOut});
             var ReObj = {
                 name: "ChatBox",
                 elem: ReverseChatBox
@@ -32,7 +32,7 @@ var AnimateAllBoxComponentsOut = function(elems, callback){
         },
         LeftBox: function(elem){  //=> ._1vc-
             elem.css("position","absolute");
-            ReverseLeftBox = TweenMax.to(elem, 3, {left: "-100%", ease: Circ.easeOut});
+            ReverseLeftBox = TweenMax.to(elem, 1.5, {left: "-100%", ease: Circ.easeOut});
             var ReObj = {
                 name: "LeftBox",
                 elem: ReverseLeftBox
@@ -41,7 +41,7 @@ var AnimateAllBoxComponentsOut = function(elems, callback){
         },
         RightBox: function(elem){  //=> ._5nb8
             elem.css("position", "relative");
-            ReverseRightBox = TweenMax.to(elem, 3, {left: "126%", ease: Circ.easeOut});
+            ReverseRightBox = TweenMax.to(elem, 1.5, {left: "126%", ease: Circ.easeOut});
             var ReObj = {
                 name: "RightBox",
                 elem: ReverseRightBox
@@ -55,7 +55,16 @@ var AnimateAllBoxComponentsOut = function(elems, callback){
         ReverseObj[ReturnSingleReverse.name] = ReturnSingleReverse.elem;
         if(i === elems.length - 1){
             console.log("Last Iteration : "+ i);
-            callback(ReverseObj);
+            secondAnimation(ReverseObj, callback);
+
         }
     }
 };
+
+//This function would adjust the coverpage and pop up the Logo
+function secondAnimation(ReverseObj, callback){
+        var CoverPageContainer = $(".fbTimelineSection.fbTimelineTopSection");
+        CoverPageContainer.css("position", 'absolute');
+        var ReverseCoverPageContainer = TweenMax.to(CoverPageContainer[0], 2, {scale: 0.8, left: "18%", ease: Circ.easeOut, delay : 3});
+        callback(ReverseObj);
+}
