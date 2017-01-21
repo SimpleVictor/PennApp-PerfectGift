@@ -20,12 +20,15 @@ var SearchingFinished = {
 
 
 var StartSearching = function(callback){
+    console.log(maybe);
+
+
+
     //WHEN EVERYTHING IS DONE
     function CheckIfDone(){
         if(SearchingFinished.BasicInfo === true && SearchingFinished.RecentPosts === true){
             console.log("FINISHED...");
-            console.log(ProfileObject);
-            callback();
+            callback(ProfileObject);
         }
     }
     //Have each function callback the Checker Function when it's done
@@ -76,31 +79,28 @@ var GrabBasicInfo = function(callback){
     callback();
 };
 
+
+
+
+// $$(".uiScaledImageContainer._517g")
+// $$("._ox1._1_d1")
+
+
+// elem.parentElement.parentElement
+
+
+
 var GrabUsersRecentPost= function(callback){
 
     //Variables for each important objects in this function
-    var OverallPostStrings = ".userContentWrapper._5pcr";
-    var VideoString        = " ._5mly._45oh";
-    var PictureString      = " ._4-eo._2t9n._50z9";
-
-    //Scroll down to atleast 5 Post
-    $("html, body").animate({ scrollTop: $(document).height() }, 100);
-
-    //Function to be called if we don't have enough yet
-    var StartChecking = function(){
-        setTimeout(function(){
-            if($(OverallPostStrings).length >= 5){
-                console.log("We now have 5 post or more...");
-                SplitUpPictureVideo($(OverallPostStrings)); // ==> Once we get > 5. Split it up. Depends if it's a video or a post
-            }else{
-                StartChecking(); // ==> If it doesn't have 5 yet. Call the funciton again and scroll some more...
-            }
-        }, 100);
-    };
+    var OverallPostStrings  = ".userContentWrapper._5pcr";
+    var OverallPostStrings2 = "._1dwg._1w_m._2ph_";
+    var VideoString         = " ._5mly._45oh";
+    var PictureString       = " ._4-eo._2t9n._50z9";
 
 
+    //Once we get more than 5 post. Past them into this function
     var SplitUpPictureVideo = function(elems){
-
         var video = [];
         var picture = [];
 
@@ -109,9 +109,53 @@ var GrabUsersRecentPost= function(callback){
             return periodStr.concat(str.replace(/ /g, '.'));
         }
 
-        for(i = 0; i < elems.length; i++){
+        //Split the 5 post out depending if it's a picture or a video
 
+        var PhotoElement = $(".uiScaledImageContainer._517g");
+        var VideoElement = $("._ox1._1_d1");
+        // console.log(".......................................");
+        // console.log(".......................................");
+
+
+        var CheckIfShared = function(str){
+            if(str.search("blob") != -1){
+                //Found it
+                return true;
+            }else{
+                return false;
+            }
         }
+
+        for(i = 0; i < VideoElement.length; i++){
+            var currentSrc = VideoElement[i].currentSrc;
+            console.log(".......................................");
+            console.log(currentSrc);
+            if(CheckIfShared(currentSrc)){
+                console.log("From Shared : " + currentSrc);
+            }else{
+                if(currentSrc === ""){
+                    console.log(VideoElement[i]);
+                }
+                console.log("From Personal : " + currentSrc);
+            }
+            console.log(".......................................");
+        }
+
+        for(i = 0; i < PhotoElement.length; i++){
+            var currentSrc = PhotoElement[i].children[0].currentSrc;
+            console.log(".......................................");
+            console.log(currentSrc);
+            if(CheckIfShared(currentSrc)){
+                console.log("From Shared : " + currentSrc);
+            }else{
+                if(currentSrc === ""){
+                    console.log(PhotoElement[i].children[0]);
+                }
+                console.log("From Personal : " + currentSrc);
+            }
+            console.log(".......................................");
+        }
+
 
         var SplitUpVideo = function(videoElems){
             var videoArr = [];
@@ -144,6 +188,21 @@ var GrabUsersRecentPost= function(callback){
         ProfileObject.recent_post = obj;
         SearchingFinished.RecentPosts = true;
         callback()
+    };
+
+    //Scroll down to atleast 5 Post
+    $("html, body").animate({ scrollTop: $(document).height() }, 100); //==> This really just needs to be run once. Fb Loads more than 5 post after page scroll
+
+    //Function to be called if we don't have enough yet
+    var StartChecking = function(){
+        setTimeout(function(){
+            if($(OverallPostStrings).length >= 5){
+                console.log("We now have 5 post or more...");
+                SplitUpPictureVideo($(OverallPostStrings2)); // ==> Once we get > 5. Split it up. Depends if it's a video or a post
+            }else{
+                StartChecking(); // ==> If it doesn't have 5 yet. Call the funciton again and scroll some more...
+            }
+        }, 100);
     };
 
     StartChecking(); // => Call if the Array doesn't come out to more than 5 Length
