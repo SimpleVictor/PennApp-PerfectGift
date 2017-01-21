@@ -10,18 +10,31 @@
 // @grant        none
 // ==/UserScript==
 
-var StartCounter = 0;
+//Official Fb Hack
+// Settings: Run At : document-end
+// Position: 10
 
+console.log("Main Script Activating...");
+
+var HeyEveryone;
+var StartCounter = 0;
 
 
 //Facebook Stock Component
 var ChatBox;
 var FBLeftBox;
+var FBRightBox;
 
 //Reverse Facebook Stock Component
 var ReverseChatBox;
 var ReverseFBLeftBox;
+var ReverseFBRightBox;
 
+
+
+function tryCallme(){
+    console.log("bang bang");
+}
 
 function doublecheck(){
     $( document ).ready(function() {
@@ -30,8 +43,40 @@ function doublecheck(){
 }
 
 function SetUpGlobalVariables(){
-    FBLeftBox = $("._1vc-");
-    console.log(FBLeftBox);
+    setTimeout(function(){
+        var sendArr =[
+            {
+                name: "ChatBox",
+                elem: $(".fbChatSidebar")
+            },
+            {
+                name: "LeftBox",
+                elem: $("._1vc-")
+            },
+            {
+                name: "RightBox",
+                elem: $("._5nb8")
+            }
+        ];
+        console.log("Sending stuff over now");
+        AnimateAllBoxComponentsOut(sendArr,function(obj){
+            console.log("Here");
+            console.log(obj);
+            ReverseChatBox = obj.ChatBox;
+            ReverseFBLeftBox = obj.LeftBox;
+            ReverseFBRightBox = obj.RightBox;
+            setTimeout(function(){
+                ReverseElementAnimation(ReverseChatBox);
+                ReverseElementAnimation(ReverseFBLeftBox);
+                ReverseElementAnimation(ReverseFBRightBox);
+            },3000);
+        })
+    },3000);
+
+}
+
+function SetUpStartingButton(){
+
 }
 
 new MutationObserver(function(mutations) {
