@@ -5,10 +5,11 @@
 // @require      http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js
 // @require      https://www.gstatic.com/firebasejs/3.6.3/firebase.js
 // @require      http://localhost:3000/AnimationFunctions.js?sdf
+// @require      http://localhost:3000/ProfileSearch.js?ddasd
 // @description  try to take over the world!
 // @author       You
 //@run-at        document-start
-// @match        https://www.facebook.com/victor.le.5?official
+// @match        https://www.facebook.com/phong.lai
 // @grant        unsafeWindow
 // @grant        GM_log
 // ==/UserScript==
@@ -50,9 +51,12 @@ function SetUpGlobalVariables(){
     ChatBox = $(".fbChatSidebar");
     FBLeftBox = $("._1vc-");
     FBRightBox = $("._5nb8");
-    setTimeout(function(){
-        AnimateAllComponentsOut();
-    }, 2000);
+
+
+    // AnimateAllComponentsOut();  // => Animate all the main components away
+    // GetEntireData(); // => Function to navigate to the about's page
+    StartSearching();
+
 }
 
 function SetUpStartingButton(){
@@ -60,7 +64,7 @@ function SetUpStartingButton(){
 }
 
 function AnimateAllComponentsOut(){
-    var sendArr =[
+    var sendArr = [
         {name: "ChatBox", elem: $(".fbChatSidebar")},
         {name: "LeftBox", elem: $("._1vc-")},
         {name: "RightBox", elem: $("._5nb8")}
@@ -72,6 +76,14 @@ function AnimateAllComponentsOut(){
         ReverseFBLeftBox = obj.LeftBox;
         ReverseFBRightBox = obj.RightBox;
     });
+}
+
+function GetEntireData(){
+    setTimeout(function(){
+        console.log("Starting now...");
+        console.log(window.location);
+        window.location.href = "https://www.facebook.com/victor.le.5/about?lst=100003645708064%3A100003645708064%3A1484644588&official";
+    }, 2000);
 }
 
 
