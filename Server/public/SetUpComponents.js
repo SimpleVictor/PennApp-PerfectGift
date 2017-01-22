@@ -102,8 +102,10 @@ var SetUpLogo = function(){
     strVar += "       -webkit-animation: blink 0.7s infinite;";
     strVar += "       -moz-animation: blink 0.7s infinite;";
     strVar += "       animation: blink 0.7s infinite;";
-    strVar += "       color: #2BB673;";
+    strVar += "        color: #3B5998;";
     strVar += "       font-size: 4.2rem;";
+    strVar += "        top: -16%;";
+    strVar += "        position: absolute;";
     strVar += "   }";
     strVar += "    @keyframes blink{";
     strVar += "        0% { opacity:1; }";
@@ -131,9 +133,7 @@ var SetUpLogo = function(){
     strVar += "<button id=\"startButton\" class=\"ui button\" color=\"positive\">Start<\/button>";
     strVar += "";
     strVar += "<!--TYPED MESSAGE-->";
-    strVar += "<div class=\"ui horizontal divider alexa-speech\"><span id=\"myelement\"><\/span><\/div>";
-
-
+    strVar += "<div class=\"ui horizontal divider alexa-speech\"><span id=\"myelement\" style=\"color: #1D2C4B\"><\/span><\/div>";
 
     FullPageContainer.prepend(strVar);
     SessionAbout();
@@ -166,6 +166,7 @@ function SessionAbout(){
     strVar += "    <\/div>";
     strVar += "<\/div>";
 
+
     FullPageContainer.prepend(strVar);
     SessionTimeline();
 }
@@ -179,6 +180,8 @@ function SessionTimeline(){
     strVar += "<style>";
     strVar += "    \/*SESSION 2 Timeline*\/";
     strVar += "    #Segment-Timeline{";
+    strVar += "        position: absolute;";
+    strVar += "        z-index: 1;";
     strVar += "        top: 34%;";
     strVar += "        display: none;";
     strVar += "    }";
@@ -187,7 +190,7 @@ function SessionTimeline(){
     strVar += "<!--Session 2 TIMELINE-->";
     strVar += "<div class=\"ui centered grid\" id=\"Segment-Timeline\">";
     strVar += "    <div class=\"fourteen wide column\">";
-    strVar += "        <div class=\"ui raised segment\">";
+    strVar += "        <div class=\"ui raised segment\" style=\"height: 30rem;\">";
     strVar += "            <div class=\"ui horizontal divider\">";
     strVar += "                <i class=\"chevron down icon\"><\/i>";
     strVar += "                Recent Posts";
@@ -196,6 +199,7 @@ function SessionTimeline(){
     strVar += "        <\/div>";
     strVar += "    <\/div>";
     strVar += "<\/div>";
+
 
 
     FullPageContainer.prepend(strVar);
@@ -208,10 +212,11 @@ function SessionTimeline(){
 
 function SessionLikes(){
     var strVar="";
-    strVar += "";
     strVar += "<style>";
     strVar += "    \/*SESSION 3 Likes*\/";
     strVar += "    #Segment-Likes{";
+    strVar += "        position: absolute;";
+    strVar += "        z-index: 1;";
     strVar += "        top: 34%;";
     strVar += "        display: none;";
     strVar += "    }";
@@ -220,10 +225,10 @@ function SessionLikes(){
     strVar += "<!--Session 3 LIKES-->";
     strVar += "<div class=\"ui centered grid\" id=\"Segment-Likes\">";
     strVar += "    <div class=\"fourteen wide column\">";
-    strVar += "        <div class=\"ui raised segment\">";
+    strVar += "        <div class=\"ui raised segment\" style=\"height: 30rem;\">";
     strVar += "            <div class=\"ui horizontal divider\">";
     strVar += "                <i class=\"chevron down icon\"><\/i>";
-    strVar += "                Recent Posts";
+    strVar += "                Recent Likes";
     strVar += "            <\/div>";
     strVar += "            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.<\/p>";
     strVar += "        <\/div>";
@@ -245,23 +250,26 @@ function SessionPictures(){
     strVar += "<style>";
     strVar += "    \/*SESSION 4 Pictures*\/";
     strVar += "    #Segment-Pictures{";
+    strVar += "        position: absolute;";
+    strVar += "        z-index: 1;";
     strVar += "        top: 34%;";
-    strVar += "        display: none";
+    strVar += "        display: none;";
     strVar += "    }";
     strVar += "<\/style>";
     strVar += "";
     strVar += "<!--Session 4 Pictures-->";
     strVar += "<div class=\"ui centered grid\" id=\"Segment-Pictures\">";
     strVar += "    <div class=\"fourteen wide column\">";
-    strVar += "        <div class=\"ui raised segment\">";
+    strVar += "        <div class=\"ui raised segment\" style=\"height: 30rem;\">";
     strVar += "            <div class=\"ui horizontal divider\">";
     strVar += "                <i class=\"chevron down icon\"><\/i>";
-    strVar += "                Recent Posts";
+    strVar += "                User's Photos";
     strVar += "            <\/div>";
     strVar += "            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.<\/p>";
     strVar += "        <\/div>";
     strVar += "    <\/div>";
     strVar += "<\/div>";
+
 
     FullPageContainer.prepend(strVar);
     SetUpButtonFunctions();

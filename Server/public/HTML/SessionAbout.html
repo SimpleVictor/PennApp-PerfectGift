@@ -31,10 +31,6 @@
 
 
 
-$("#intro_container_id")[0].parentElement
-
-
-
 
 
 
@@ -43,6 +39,8 @@ $("#intro_container_id")[0].parentElement
 <style>
     /*SESSION 2 Timeline*/
     #Segment-Timeline{
+        position: absolute;
+        z-index: 1;
         top: 34%;
         display: none;
     }
@@ -51,7 +49,7 @@ $("#intro_container_id")[0].parentElement
 <!--Session 2 TIMELINE-->
 <div class="ui centered grid" id="Segment-Timeline">
     <div class="fourteen wide column">
-        <div class="ui raised segment">
+        <div class="ui raised segment" style="height: 30rem;">
             <div class="ui horizontal divider">
                 <i class="chevron down icon"></i>
                 Recent Posts
@@ -77,6 +75,8 @@ $("#intro_container_id")[0].parentElement
 <style>
     /*SESSION 3 Likes*/
     #Segment-Likes{
+        position: absolute;
+        z-index: 1;
         top: 34%;
         display: none;
     }
@@ -85,10 +85,10 @@ $("#intro_container_id")[0].parentElement
 <!--Session 3 LIKES-->
 <div class="ui centered grid" id="Segment-Likes">
     <div class="fourteen wide column">
-        <div class="ui raised segment">
+        <div class="ui raised segment" style="height: 30rem;">
             <div class="ui horizontal divider">
                 <i class="chevron down icon"></i>
-                Recent Posts
+                Recent Likes
             </div>
             <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
         </div>
@@ -113,18 +113,20 @@ $("#intro_container_id")[0].parentElement
 <style>
     /*SESSION 4 Pictures*/
     #Segment-Pictures{
+        position: absolute;
+        z-index: 1;
         top: 34%;
-        display: none
+        display: none;
     }
 </style>
 
 <!--Session 4 Pictures-->
 <div class="ui centered grid" id="Segment-Pictures">
     <div class="fourteen wide column">
-        <div class="ui raised segment">
+        <div class="ui raised segment" style="height: 30rem;">
             <div class="ui horizontal divider">
                 <i class="chevron down icon"></i>
-                Recent Posts
+                User's Photos
             </div>
             <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
         </div>

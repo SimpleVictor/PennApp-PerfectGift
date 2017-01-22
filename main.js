@@ -6,10 +6,10 @@
 // @require      https://www.gstatic.com/firebasejs/3.6.3/firebase.js
 // @require      http://localhost:3000/typed.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js
-// @require      http://localhost:3000/AnimationFunctions.js?sscdvdfsd
-// @require      http://localhost:3000/ProfileSearch.js?sdsdssdfdds
-// @require      http://localhost:3000/SetUpComponents.js?sdfds
-// @require      http://localhost:3000/SessionComponents.js?sddssdsd
+// @require      http://localhost:3000/AnimationFunctions.js?sscdvdsd
+// @require      http://localhost:3000/ProfileSearch.js?sdsdssd
+// @require      http://localhost:3000/SetUpComponents.js?sdsd
+// @require      http://localhost:3000/SessionComponents.js?sddsd
 // @description  try to take over the world!
 // @author       You
 // @run-at        document-start
@@ -53,9 +53,10 @@ console.log(firebase);
 function doublecheck(){
     $( document ).ready(function() {
         $$ = $; // ==>Debug purposes for the console on Chrome
-        if(!typeof(TweenMax) === "undefined"){ // ==> Check if we have Tweenmax first
+        // if(!typeof(TweenMax) === "undefined"){ // ==> Check if we have Tweenmax first
+        //     console.log("Using Tween Max");
             TweenMax.ticker.useRAF(false);
-        }
+        // }
         AddExternalCssFiles();
         SetUpGlobalVariables(); //==>Setup Environment
     });
@@ -123,8 +124,8 @@ function AnimateHomePage(){
 //When The User Clicks the App button on the Main Page
 window.AppButtonClicked = function(){
     TweenMax.to($("#home-container"), 3, {opacity: 0, ease: Circ.easeOut});
-    AnimateHomePage()
-}
+    AnimateHomePage();
+};
 
 //GoToAboutPage
 function GrabDataFromAboutPage(){
@@ -154,7 +155,7 @@ function toDataUrl(url, callback) {
         var reader = new FileReader();
         reader.onloadend = function() {
             callback(reader.result);
-        }
+        };
         reader.readAsDataURL(xhr.response);
     };
     xhr.open('GET', url);
