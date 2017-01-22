@@ -5,9 +5,9 @@
 // @require      http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js
 // @require      https://www.gstatic.com/firebasejs/3.6.3/firebase.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js
-// @require      http://localhost:3000/AnimationFunctions.js?sdfs
-// @require      http://localhost:3000/ProfileSearch.js?sddsasds
-// @require      http://localhost:3000/SetUpComponents.js?sdd
+// @require      http://localhost:3000/AnimationFunctions.js?sscdvcdsd
+// @require      http://localhost:3000/ProfileSearch.js?sdsds
+// @require      http://localhost:3000/SetUpComponents.js?ssxds
 // @description  try to take over the world!
 // @author       You
 // @run-at        document-start
@@ -18,11 +18,12 @@
 // @grant        GM_xmlhttpRequest
 // ==/UserScript==
 
+
+unsafeWindow.on = true;
+
 //Official Fb Hack
 // Settings: Run At : document-end
 // Position: 10
-
-
 
 //Maker sure all external scripts were loaded
 console.log(ExternalScript1);
@@ -59,15 +60,15 @@ function doublecheck(){
 }
 
 function StarterMethods(wordCheck){
-    // AnimateAllComponentsOut();  // => Animate all the main components away
+    // AnimateHomePage();  // => Animate all the main components away
     // GrabDataFromAboutPage(); // => Function to navigate to the about's page
-    toDataUrl('https://scontent.fewr1-2.fna.fbcdn.net/v/t1.0-0/p110x80/15871981_10154268680751347_5872502637855513177_n.jpg?oh=4864a626e4ce98ccc1c72a849ae38863&oe=5909924B', function(a){
-        console.log(a);
-        SendToFirebase(a);
+    // toDataUrl('https://scontent.fewr1-2.fna.fbcdn.net/v/t1.0-0/p110x80/15871981_10154268680751347_5872502637855513177_n.jpg?oh=4864a626e4ce98ccc1c72a849ae38863&oe=5909924B', function(a){
+    //     console.log(a);
+    //     SendToFirebase(a);
         // console.log(blobFirebase(a));
-    });
+    // });
     // StartSearching(wordCheck);
-    // SetUpHomeButtons();
+    SetUpHomeButtons();
 }
 
 function SetUpGlobalVariables(){
@@ -102,18 +103,25 @@ function SetUpGlobalVariables(){
 function SetUpStartingButton(){
 
 }
-//
-function AnimateAllComponentsOut(){
+
+//Start Animating the Page into the Home Page where the logo is
+function AnimateHomePage(){
     var sendArr = [
         {name: "ChatBox", elem: $(".fbChatSidebar")},
         {name: "LeftBox", elem: $("._1vc-")},
         {name: "RightBox", elem: $("._5nb8")}
     ];
-    AnimateAllBoxComponentsOut(sendArr,function(obj){   // ==> Calls The AnimateFunction.js ( AnimateAllBoxComponentsOut function )
+    StartAnimateHomePage(sendArr,function(obj){   // ==> Calls The AnimateFunction.js ( AnimateAllBoxComponentsOut function )
         ReverseChatBox = obj.ChatBox;
         ReverseFBLeftBox = obj.LeftBox;
         ReverseFBRightBox = obj.RightBox;
     });
+}
+
+//When The User Clicks the App button on the Main Page
+window.AppButtonClicked = function(){
+    TweenMax.to($("#home-container"), 3, {opacity: 0, ease: Circ.easeOut});
+    AnimateHomePage()
 }
 
 //GoToAboutPage
@@ -132,7 +140,7 @@ function AddExternalCssFiles(){
         $("._19eb").css("padding", "9px");
     };
     //Add Semantic CSS
-    $('head').prepend('<style>*, :after, :before {box-sizing: initial !important;}</style><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css" type="text/css" />');
+    $('head').prepend('<style>*, :after, :before {box-sizing: initial !important;}</style><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Chewy" rel="stylesheet">');
     FixUpCssCauseOfExternalFiles();
 }
 
@@ -192,7 +200,7 @@ function SendToFirebase(str){
     });
 }
 
-//This is here to make sure everything is loaded first before doing anything
+// This is here to make sure everything is loaded first before doing anything
 new MutationObserver(function(mutations) {
     if($("body") && $("head")){
         StartCounter++;
@@ -201,3 +209,4 @@ new MutationObserver(function(mutations) {
         }
     }
 }).observe(document, {childList: true, subtree: true});
+

@@ -38,14 +38,14 @@ var StartSearching = function(callback){
 
 //Grabs your basic Info
 var GrabBasicInfo = function(callback){
-
     //Variables for each Basic Info Icon
-    var OverallString = "._2m_3._3-91._8o._8s.lfloat._ohe.img.sp_JCe37g3qSzR";
-    var WorkIcon = ".sx_e71569";
-    var CollegeIcon = ".sx_bf593f";
-    var AddressIcon = ".sx_b52f34";
-    var RelationshipIcon = ".sx_f53be5";
-
+    // var OverallString = "._2m_3._3-91._8o._8s.lfloat._ohe.img.sp_JCe37g3qSzR";
+    var OverallString = "._2m_3._3-91._8o._8s";
+    // var WorkIcon = ".sx_e71569";
+    var WorkIcon = ".sx_6ff253";
+    var CollegeIcon = ".sx_d0aa4d";
+    var AddressIcon = ".sx_1257c2";
+    var RelationshipIcon = ".sx_4bdb4b";
 
     //Atm this was used only for the Work Object. Because we want the users to have multiple jobs
     function SplitUpArray(elem){
@@ -61,7 +61,7 @@ var GrabBasicInfo = function(callback){
     }
 
     //Condition statement is stated to realize there are a list of thingsd to grab
-    if($("._2m_3._3-91._8o._8s.lfloat._ohe.img.sp_JCe37g3qSzR").length >= 1){
+    if($("._2m_3._3-91._8o._8s").length >= 1){
         var obj = {
             work: $(OverallString + WorkIcon).length >= 1 ? SplitUpArray($(OverallString + WorkIcon)) : "Did not state any jobs",
             college: $(OverallString + CollegeIcon).length >= 1 ?  $(OverallString + CollegeIcon)[0].offsetParent.innerText : "Did not state any college",

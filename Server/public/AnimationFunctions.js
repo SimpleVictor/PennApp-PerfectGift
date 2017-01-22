@@ -1,18 +1,13 @@
 
 var ExternalScript1 = "AnimationFunctions.js has been loaded";
 
-//Reverse Animation
+//Reverse Animation by passing in an element
 var ReverseElementAnimation = function(elem){
     elem.reverse();
 };
 
-var whyNot = function(){
-    console.log("bang bvanf");
-}
-
-var AnimateAllBoxComponentsOut = function(elems, callback){
-    console.log("Mde it to the Components");
-    console.log(elems);
+//Function will be called from Main.js file after the App button was clicked
+var StartAnimateHomePage = function(elems, callback){
     var ReverseObj = {
         ChatBox: "null",
         LeftBox: "null",
@@ -65,6 +60,23 @@ var AnimateAllBoxComponentsOut = function(elems, callback){
 function secondAnimation(ReverseObj, callback){
         var CoverPageContainer = $(".fbTimelineSection.fbTimelineTopSection");
         CoverPageContainer.css("position", 'absolute');
-        var ReverseCoverPageContainer = TweenMax.to(CoverPageContainer[0], 2, {scale: 0.8, left: "18%", ease: Circ.easeOut, delay : 3});
-        callback(ReverseObj);
+        setTimeout(function(){
+            var ReverseCoverPageContainer = TweenMax.to(CoverPageContainer[0], 2, {scale: 0.8, left: "22%", top: "-122px", ease: Circ.easeOut});
+            thirdAnimation(ReverseObj, callback);
+        },1500);
 }
+
+//Bring up the Logos
+function thirdAnimation(ReverseObj, callback){
+    setTimeout(function(){
+        window.ReverseTitle = TweenMax.to($("#title-name"), 1, {scale: 1, ease: Circ.easeOut});
+        window.ReverseLogo = TweenMax.to($("#main-logo"), 1, {scale: 0.25, ease: Circ.easeOut});
+        window.ReverseStartButton = TweenMax.to($("#startButton"), 1, {scale: 1, ease: Circ.easeOut});
+    }, 1000);
+    callback(ReverseObj);
+}
+
+
+
+
+
