@@ -70,7 +70,8 @@ function secondAnimation(ReverseObj, callback){
 function thirdAnimation(ReverseObj, callback){
     setTimeout(function(){
         window.ReverseTitle = TweenMax.to($("#title-name"), 1, {scale: 1, ease: Circ.easeOut});
-        window.ReverseLogo = TweenMax.to($("#main-logo"), 1, {scale: 0.25, ease: Circ.easeOut});
+        $("#main-logo").css("display", "block");
+        window.ReverseLogo = TweenMax.to($("#main-logo"), 1, {scale: 0.4, ease: Circ.easeOut});
         window.ReverseStartButton = TweenMax.to($("#startButton"), 1, {scale: 1, ease: Circ.easeOut});
     }, 1000);
     callback(ReverseObj);

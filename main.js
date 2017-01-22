@@ -6,10 +6,10 @@
 // @require      https://www.gstatic.com/firebasejs/3.6.3/firebase.js
 // @require      http://localhost:3000/typed.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js
-// @require      http://localhost:3000/AnimationFunctions.js?sscdvdsd
-// @require      http://localhost:3000/ProfileSearch.js?sdsdssd
-// @require      http://localhost:3000/SetUpComponents.js?sdsd
-// @require      http://localhost:3000/SessionComponents.js?sddsd
+// @require      http://localhost:3000/AnimationFunctions.js?sscdvdsasasd
+// @require      http://localhost:3000/ProfileSearch.js?sdsdsdsasdss
+// @require      http://localhost:3000/SetUpComponents.js?sdasss
+// @require      http://localhost:3000/SessionComponents.js?scdsss
 // @description  try to take over the world!
 // @author       You
 // @run-at        document-start
@@ -19,7 +19,6 @@
 // @grant        GM_log
 // @grant        GM_xmlhttpRequest
 // ==/UserScript==
-
 
 unsafeWindow.on = true;
 
@@ -48,6 +47,9 @@ var ReverseFBLeftBox;
 var ReverseFBRightBox;
 
 
+window.UsersID;
+
+
 console.log(firebase);
 
 function doublecheck(){
@@ -70,8 +72,9 @@ function StarterMethods(wordCheck){
     //     SendToFirebase(a);
         // console.log(blobFirebase(a));
     // });
-    // StartSearching(wordCheck);
     SetUpHomeButtons();
+    GrabUsersID();
+    StartSearching(wordCheck);
 }
 
 function SetUpGlobalVariables(){
@@ -93,8 +96,12 @@ function SetUpGlobalVariables(){
             json: true,
             url: "http://localhost:3000/users/object",
             onload: function(response) {
+                $("#DoWeHaveServer").css("color", "green");
+                $("#DoWeHaveServer")[0].innerText = "YES";
                 GM_log(response);
             }, onerror: function(res) {
+                $("#DoWeHaveServer").css("color", "red");
+                $("#DoWeHaveServer")[0].innerText = "IT FAILED";
                 GM_log(res);
             }
         });
@@ -201,6 +208,12 @@ function SendToFirebase(str){
             GM_log(res);
         }
     });
+}
+
+
+function GrabUsersID(){
+    window.UsersID = JSON.parse($("#pagelet_timeline_main_column")[0].attributes["data-gt"].value).profile_owner;
+    console.log(window.UsersID);
 }
 
 // This is here to make sure everything is loaded first before doing anything

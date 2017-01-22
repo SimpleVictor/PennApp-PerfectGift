@@ -7,7 +7,6 @@ var FullPageContainer = $("._li");
 //Place the Home Status/ About Status/ And Animation Starter Button
 var SetUpHomeButtons = function(){
     var strVar="";
-    strVar += "";
     strVar += "<style>";
     strVar += "    #home-container{";
     strVar += "        z-index: 5;";
@@ -26,7 +25,9 @@ var SetUpHomeButtons = function(){
     strVar += "                <a>Friends<\/a>";
     strVar += "            <\/div>";
     strVar += "            <div class=\"description\">";
-    strVar += "                Matthew is an interior designer living in New York.";
+    strVar += "                ID: <p id=\"DoWeHaveID\" style=\"color: red\">NO<\/p><br\/>";
+    strVar += "                GrabLikes: <p id=\"DoWeHaveLikes\" style=\"color: red\">No<\/p><\/br\/>";
+    strVar += "                ServerData: <p id=\"DoWeHaveServer\" style=\"color: green\">NO<\/p>";
     strVar += "            <\/div>";
     strVar += "        <\/div>";
     strVar += "        <div class=\"extra content\">";
@@ -37,6 +38,7 @@ var SetUpHomeButtons = function(){
     strVar += "        <\/div>";
     strVar += "    <\/div>";
     strVar += "<\/div>";
+
 
     FullPageContainer.prepend(strVar);
     SetUpLogo();
@@ -67,11 +69,10 @@ var SetUpLogo = function(){
     strVar += "";
     strVar += "    #main-logo{";
     strVar += "        position: absolute;";
-    strVar += "        top: -3%;";
+    strVar += "        top: 0;";
     strVar += "        z-index: 1;";
-    strVar += "        \/*transform: scale(0.25);*\/";
-    strVar += "        left: 45%;";
-    strVar += "        transform: scale(0);";
+    strVar += "        display: none;";
+    strVar += "        left: 34%;";
     strVar += "    }";
     strVar += "";
     strVar += "    #startButton{";
@@ -135,6 +136,8 @@ var SetUpLogo = function(){
     strVar += "<!--TYPED MESSAGE-->";
     strVar += "<div class=\"ui horizontal divider alexa-speech\"><span id=\"myelement\" style=\"color: #1D2C4B\"><\/span><\/div>";
 
+
+
     FullPageContainer.prepend(strVar);
     SessionAbout();
 }
@@ -195,10 +198,22 @@ function SessionTimeline(){
     strVar += "                <i class=\"chevron down icon\"><\/i>";
     strVar += "                Recent Posts";
     strVar += "            <\/div>";
-    strVar += "            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.<\/p>";
+    strVar += "";
+    strVar += "            <div class=\"ui small images\" style=\"text-align: center;\">";
+    strVar += "                <img src=\"https:\/\/placehold.it\/150x150\" id=\"placeit0\">";
+    strVar += "                <img src=\"https:\/\/placehold.it\/150x150\" id=\"placeit1\">";
+    strVar += "                <img src=\"https:\/\/placehold.it\/150x150\" id=\"placeit2\">";
+    strVar += "                <img src=\"https:\/\/placehold.it\/150x150\" id=\"placeit3\">";
+    strVar += "                <img src=\"https:\/\/placehold.it\/150x150\" id=\"placeit4\">";
+    strVar += "                <img src=\"https:\/\/placehold.it\/150x150\" id=\"placeit5\">";
+    strVar += "            <\/div>";
     strVar += "        <\/div>";
     strVar += "    <\/div>";
     strVar += "<\/div>";
+
+
+
+
 
 
 
@@ -243,8 +258,6 @@ function SessionLikes(){
 
 
 
-
-
 function SessionPictures(){
     var strVar="";
     strVar += "<style>";
@@ -278,6 +291,13 @@ function SessionPictures(){
 
 var SetUpButtonFunctions = function(){
     setTimeout(function(){
+        if(window.UsersID){
+            console.log(window.UsersID);
+            $("#DoWeHaveID").css("color", "green");
+            $("#DoWeHaveID")[0].innerHTML = "";
+            $("#DoWeHaveID")[0].innerHTML = "YES";
+        }
+
         $( "#AppButtonClicked" ).on("click", function(){
             window.AppButtonClicked();
         });

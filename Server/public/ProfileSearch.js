@@ -32,7 +32,6 @@ var StartSearching = function(callback){
     // GrabUsersRecentPost(CheckIfDone);
     newGrabPost(CheckIfDone);
     GrabUsersPhoto(CheckIfDone);
-
 };
 
 
