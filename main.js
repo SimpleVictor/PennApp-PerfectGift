@@ -5,9 +5,9 @@
 // @require      http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js
 // @require      https://www.gstatic.com/firebasejs/3.6.3/firebase.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js
-// @require      http://localhost:3000/AnimationFunctions.js?sdfsd
-// @require      http://localhost:3000/ProfileSearch.js?sddsd
-// @require      http://localhost:3000/SetUpComponents.js?sdds
+// @require      http://localhost:3000/AnimationFunctions.js?sdfs
+// @require      http://localhost:3000/ProfileSearch.js?sddsasds
+// @require      http://localhost:3000/SetUpComponents.js?sdd
 // @description  try to take over the world!
 // @author       You
 // @run-at        document-start
@@ -17,8 +17,6 @@
 // @grant        GM_log
 // @grant        GM_xmlhttpRequest
 // ==/UserScript==
-
-
 
 //Official Fb Hack
 // Settings: Run At : document-end
@@ -60,6 +58,18 @@ function doublecheck(){
     });
 }
 
+function StarterMethods(wordCheck){
+    // AnimateAllComponentsOut();  // => Animate all the main components away
+    // GrabDataFromAboutPage(); // => Function to navigate to the about's page
+    toDataUrl('https://scontent.fewr1-2.fna.fbcdn.net/v/t1.0-0/p110x80/15871981_10154268680751347_5872502637855513177_n.jpg?oh=4864a626e4ce98ccc1c72a849ae38863&oe=5909924B', function(a){
+        console.log(a);
+        SendToFirebase(a);
+        // console.log(blobFirebase(a));
+    });
+    // StartSearching(wordCheck);
+    // SetUpHomeButtons();
+}
+
 function SetUpGlobalVariables(){
 
     ChatBox = $(".fbChatSidebar");
@@ -84,13 +94,9 @@ function SetUpGlobalVariables(){
                 GM_log(res);
             }
         });
-    }
+    };
 
-    // AnimateAllComponentsOut();  // => Animate all the main components away
-    // GrabDataFromAboutPage(); // => Function to navigate to the about's page
-    // StartSearching(wordCheck);
-    SetUpHomeButtons();
-
+    StarterMethods(wordCheck);
 }
 
 function SetUpStartingButton(){
@@ -124,10 +130,66 @@ function AddExternalCssFiles(){
     //Fix up any css orignally that got messed from adding an external css file
     var FixUpCssCauseOfExternalFiles = function(){
         $("._19eb").css("padding", "9px");
-    }
+    };
     //Add Semantic CSS
     $('head').prepend('<style>*, :after, :before {box-sizing: initial !important;}</style><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css" type="text/css" />');
     FixUpCssCauseOfExternalFiles();
+}
+
+
+function toDataUrl(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.responseType = 'blob';
+    xhr.onload = function() {
+        var reader = new FileReader();
+        reader.onloadend = function() {
+            callback(reader.result);
+        }
+        reader.readAsDataURL(xhr.response);
+    };
+    xhr.open('GET', url);
+    xhr.send();
+}
+
+function blobFirebase(dataURI){
+    // convert base64 to raw binary data held in a string
+    var byteString = atob(dataURI.split(',')[1]);
+
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+    // write the bytes of the string to an ArrayBuffer
+    var arrayBuffer = new ArrayBuffer(byteString.length);
+    var _ia = new Uint8Array(arrayBuffer);
+    for (var i = 0; i < byteString.length; i++) {
+        _ia[i] = byteString.charCodeAt(i);
+    }
+
+    var dataView = new DataView(arrayBuffer);
+    var blob = new Blob([dataView], { type: mimeString });
+    return blob;
+}
+
+function SendToFirebase(str){
+
+    var obj = {
+        myString : str
+    };
+
+    var NewObj = JSON.stringify(obj);
+
+    GM_xmlhttpRequest({
+        method: "POST",
+        data: NewObj,
+        headers: {"Content-Type": "application/json;charset=UTF-8"},
+        json: true,
+        url: "http://localhost:3000/users/blob/",
+        onload: function(response) {
+            GM_log(response);
+        }, onerror: function(res) {
+            GM_log(res);
+        }
+    });
 }
 
 //This is here to make sure everything is loaded first before doing anything
@@ -139,5 +201,3 @@ new MutationObserver(function(mutations) {
         }
     }
 }).observe(document, {childList: true, subtree: true});
-
-

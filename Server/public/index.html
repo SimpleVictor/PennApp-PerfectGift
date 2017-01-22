@@ -4,27 +4,22 @@
 
         <title>test</title>
         <script type="text/javascript" src="https://sdk.clarifai.com/js/clarifai-latest.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     </head>
     <body>
 
-        <h1>Test</h1>
+
+
+        <button>Send Obj</button>
 
     <script>
-        MyClarifai = new Clarifai.App(
-            'zQmjrCzLwO0_qn9sXl7L6l0eY7NyXMbX4a_EhVXz',
-            'BrZ3m7IwDWD2E9QaDzV3FhpQYu159r1t7QegXIt8'
-        );
-        console.log(MyClarifai);
 
-        MyClarifai.models.predict(Clarifai.GENERAL_MODEL, 'https://samples.clarifai.com/metro-north.jpg').then(
-            function(response) {
-                console.log("Got Response back...");
-                console.log(response);
-            },
-            function(err) {
-                console.error(err);
-            }
-        );
+        $( document ).ready(function() {
+
+
+
+        });
+
     </script>
 
     </body>

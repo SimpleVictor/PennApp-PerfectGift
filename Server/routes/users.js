@@ -9,10 +9,23 @@ router.get('/', function(req, res, next) {
 router.post('/object', function(req, res, next) {
 
     console.log("reached here");
-    console.log(req.body);
+    // console.log(req.body);
+    console.log(req.body.basic_info.work);
 
     var obj = {
       message: "we received your object"
+    };
+
+    res.json(obj);
+});
+
+router.post('/blob', function(req, res, next) {
+
+    console.log("reached here");
+    console.log(req.body);
+
+    var obj = {
+        message: "we received your blob"
     };
 
     res.json(obj);

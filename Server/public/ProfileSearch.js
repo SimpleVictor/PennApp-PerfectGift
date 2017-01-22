@@ -14,21 +14,23 @@ var ProfileObject = {};
 var SearchingFinished = {
     BasicInfo: false,
     RecentPosts: false,
-    UsersPhoto: false
+    UsersPhoto: false,
+    newGrabPost: false
 };
 
 var StartSearching = function(callback){
 
     //WHEN EVERYTHING IS DONE
     function CheckIfDone(){
-        if(SearchingFinished.BasicInfo === true && SearchingFinished.RecentPosts === true && SearchingFinished.UsersPhoto === true){
+        if(SearchingFinished.BasicInfo === true && SearchingFinished.newGrabPost === true && SearchingFinished.UsersPhoto === true){
             console.log("FINISHED...");
             callback(ProfileObject);
         }
     }
     //Have each function callback the Checker Function when it's done
     GrabBasicInfo(CheckIfDone);
-    GrabUsersRecentPost(CheckIfDone);
+    // GrabUsersRecentPost(CheckIfDone);
+    newGrabPost(CheckIfDone);
     GrabUsersPhoto(CheckIfDone);
 
 };
@@ -36,7 +38,6 @@ var StartSearching = function(callback){
 
 //Grabs your basic Info
 var GrabBasicInfo = function(callback){
-
 
     //Variables for each Basic Info Icon
     var OverallString = "._2m_3._3-91._8o._8s.lfloat._ohe.img.sp_JCe37g3qSzR";
@@ -77,15 +78,7 @@ var GrabBasicInfo = function(callback){
 
 
 
-
-// $$(".uiScaledImageContainer._517g")
-// $$("._ox1._1_d1")
-
-
-// elem.parentElement.parentElement
-
-
-
+//Grab Top 5 Post from users
 var GrabUsersRecentPost= function(callback){
 
     //Variables for each important objects in this function
@@ -130,6 +123,7 @@ var GrabUsersRecentPost= function(callback){
                 if(currentSrc === ""){
                     console.log($(VideoElement[i]));
                 }
+                console.log("video");
                 console.log("From Personal : " + currentSrc);
             }
             console.log(".......................................");
@@ -143,9 +137,10 @@ var GrabUsersRecentPost= function(callback){
                 console.log("From Shared : " + currentSrc);
             }else{
                 if(currentSrc === ""){
-                    console.log($(PhotoElement[i].children[0]));
+                    console.log($(PhotoElement[i]));
                 }
-                console.log("From Personal : " + currentSrc);
+                console.log("Photo");
+                console.log("From Personal : " + PhotoElement[i].children[0].currentSrc);
             }
             console.log(".......................................");
         }
@@ -201,6 +196,76 @@ var GrabUsersRecentPost= function(callback){
 
     StartChecking(); // => Call if the Array doesn't come out to more than 5 Length
 
+
+}
+// $($("._1dwg._1w_m._2ph_")[1].children[2])
+var newGrabPost = function(callback){
+
+    var OverallArray = "._1dwg._1w_m._2ph_";
+
+    var SplitUpPost = function(main_arr){
+        var FullPostArray = [];
+
+        function ExtractDate(elem){
+            var date = $(elem.children[0]).find("._5pcq")[0].innerText;
+            return date;
+        }
+
+        function ExtractDescription(elem){
+
+            var desc;
+            if($(elem)[0].innerText !== ""){
+                desc = $(elem)[0].innerText;
+            }else{
+                desc = false;
+            }
+            return desc;
+        }
+
+        function ExtractPhoto(elem){
+            if($(elem).find("._3chq").length){
+                var photo = $(elem).find("._3chq")[0].currentSrc;
+            }else if (typeof($(elem).find(".uiScaledImageContainer._517g")[0].children[0]) !== "undefined"){
+                var photo = $(elem).find(".uiScaledImageContainer._517g")[0].children[0].currentSrc;
+            }else{
+                var photo = false;
+            }
+            return photo;
+        }
+
+        for(i = 0; i < main_arr.length; i++){
+            var StartingPoint = main_arr[i].children[2];
+            var StartingDatePoint = StartingPoint.children[0];
+            var StartingDescPoint = StartingPoint.children[1];
+            var StartingPhotoPoint = StartingPoint.children[2];
+            var obj = {
+                date: ExtractDate(StartingDatePoint) ? ExtractDate(StartingDatePoint) : "Had a problem with the date element",
+                description: ExtractDescription(StartingDescPoint) ? ExtractDescription(StartingDescPoint) : "NO description",
+                picture: ExtractPhoto(StartingPhotoPoint) ? ExtractPhoto(StartingPhotoPoint) : "Had a problem finding the photo src"
+            };
+            FullPostArray.push(obj);
+        };
+
+        ProfileObject.newGrabPost = FullPostArray;
+        SearchingFinished.newGrabPost = true;
+        callback()
+    };
+
+    //Scroll down to atleast 5 Post
+    $("html, body").animate({ scrollTop: $(document).height() }, 100); //==> This really just needs to be run once. Fb Loads more than 5 post after page scroll
+
+    //Function to be called if we don't have enough yet
+    var StartChecking2 = function(){
+        setTimeout(function(){
+            if($(OverallArray).length >= 5){
+                SplitUpPost($(OverallArray)); // ==> Once we get > 5. Split it up. Depends if it's a video or a post
+            }else{
+                StartChecking2(); // ==> If it doesn't have 5 yet. Call the funciton again and scroll some more...
+            }
+        }, 100);
+    };
+
+    StartChecking2(); // => Call if the Array doesn't come out to more than 5 Length
 
 }
 
