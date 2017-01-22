@@ -37,6 +37,42 @@
         color: #FFF;
         transform: scale(0);
     }
+    .alexa-speech{
+        text-align: center;
+        /*font-size: 46px;*/
+        font-weight: bolder;
+        position:absolute;
+        width: 100%;
+        z-index: 1;
+        bottom: -3%;
+        color: #2bb673;
+        margin: 0;
+        font-size: 2.6rem !important;
+        padding-bottom: 2%;
+    }
+    .typed-cursor{
+       opacity: 1;
+       -webkit-animation: blink 0.7s infinite;
+       -moz-animation: blink 0.7s infinite;
+       animation: blink 0.7s infinite;
+       color: #2BB673;
+       font-size: 4.2rem;
+   }
+    @keyframes blink{
+        0% { opacity:1; }
+        50% { opacity:0; }
+        100% { opacity:1; }
+    }
+    @-webkit-keyframes blink{
+        0% { opacity:1; }
+        50% { opacity:0; }
+        100% { opacity:1; }
+    }
+    @-moz-keyframes blink{
+        0% { opacity:1; }
+        50% { opacity:0; }
+        100% { opacity:1; }
+    }
 </style>
 
 <!--Title-->
@@ -46,3 +82,6 @@
 
 <!--Start Button-->
 <button id="startButton" class="ui button" color="positive">Start</button>
+
+<!--TYPED MESSAGE-->
+<div class="ui horizontal divider alexa-speech"><span id="myelement"></span></div>

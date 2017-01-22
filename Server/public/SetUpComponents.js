@@ -84,6 +84,42 @@ var SetUpLogo = function(){
     strVar += "        color: #FFF;";
     strVar += "        transform: scale(0);";
     strVar += "    }";
+    strVar += "    .alexa-speech{";
+    strVar += "        text-align: center;";
+    strVar += "        \/*font-size: 46px;*\/";
+    strVar += "        font-weight: bolder;";
+    strVar += "        position:absolute;";
+    strVar += "        width: 100%;";
+    strVar += "        z-index: 1;";
+    strVar += "        bottom: -3%;";
+    strVar += "        color: #2bb673;";
+    strVar += "        margin: 0;";
+    strVar += "        font-size: 2.6rem !important;";
+    strVar += "        padding-bottom: 2%;";
+    strVar += "    }";
+    strVar += "    .typed-cursor{";
+    strVar += "       opacity: 1;";
+    strVar += "       -webkit-animation: blink 0.7s infinite;";
+    strVar += "       -moz-animation: blink 0.7s infinite;";
+    strVar += "       animation: blink 0.7s infinite;";
+    strVar += "       color: #2BB673;";
+    strVar += "       font-size: 4.2rem;";
+    strVar += "   }";
+    strVar += "    @keyframes blink{";
+    strVar += "        0% { opacity:1; }";
+    strVar += "        50% { opacity:0; }";
+    strVar += "        100% { opacity:1; }";
+    strVar += "    }";
+    strVar += "    @-webkit-keyframes blink{";
+    strVar += "        0% { opacity:1; }";
+    strVar += "        50% { opacity:0; }";
+    strVar += "        100% { opacity:1; }";
+    strVar += "    }";
+    strVar += "    @-moz-keyframes blink{";
+    strVar += "        0% { opacity:1; }";
+    strVar += "        50% { opacity:0; }";
+    strVar += "        100% { opacity:1; }";
+    strVar += "    }";
     strVar += "<\/style>";
     strVar += "";
     strVar += "<!--Title-->";
@@ -93,6 +129,11 @@ var SetUpLogo = function(){
     strVar += "";
     strVar += "<!--Start Button-->";
     strVar += "<button id=\"startButton\" class=\"ui button\" color=\"positive\">Start<\/button>";
+    strVar += "";
+    strVar += "<!--TYPED MESSAGE-->";
+    strVar += "<div class=\"ui horizontal divider alexa-speech\"><span id=\"myelement\"><\/span><\/div>";
+
+
 
     FullPageContainer.prepend(strVar);
     SessionAbout();
@@ -234,10 +275,7 @@ var SetUpButtonFunctions = function(){
         });
 
         $("#startButton").on("click", function(){
-           console.log("dskjlcklsdlkjdsh");
-           window.ReverseLogo.reverse();
-           window.ReverseStartButton.reverse();
-           TweenMax.to($("#title-name"), 1, {scale: 0.5, left: "59%", top: "81%"});
+           window.StartSessions();
         });
 
     }, 1000);

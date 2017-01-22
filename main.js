@@ -4,10 +4,12 @@
 // @version      0.1
 // @require      http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js
 // @require      https://www.gstatic.com/firebasejs/3.6.3/firebase.js
+// @require      http://localhost:3000/typed.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js
-// @require      http://localhost:3000/AnimationFunctions.js?sscdvcdsd
-// @require      http://localhost:3000/ProfileSearch.js?sdsds
-// @require      http://localhost:3000/SetUpComponents.js?ssxds
+// @require      http://localhost:3000/AnimationFunctions.js?sscdvdfsd
+// @require      http://localhost:3000/ProfileSearch.js?sdsdssdfdds
+// @require      http://localhost:3000/SetUpComponents.js?sdfds
+// @require      http://localhost:3000/SessionComponents.js?sddssdsd
 // @description  try to take over the world!
 // @author       You
 // @run-at        document-start
