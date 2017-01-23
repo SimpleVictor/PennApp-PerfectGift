@@ -1,4 +1,31 @@
 <style>
+
+    #secret-logo {
+        position: absolute;
+        top: -32%;
+        z-index: 0;
+        left: -38%;
+        display: block;
+        transform: rotate(-61deg) scale(0.2);
+    }
+
+    #lastframe{
+        height:486px;
+        width: 88%;
+        z-index: 6;
+        position: absolute;
+        top: 34%;
+        left: 6%;
+    }
+
+    #database-logo{
+        position: absolute;
+        z-index: 5;
+        transform: scale(0.5);
+        top: 64%;
+        right: 3%;
+        display: none;
+    }
     #title-name{
         font-family: 'Chewy', cursive !important;
         font-weight: bolder;
@@ -80,9 +107,15 @@
 <h1 id="title-name">Perfect<span class="two-letter-logo">Gift</span></h1>
 <!--Main Logo-->
 <img id="main-logo" src="http://localhost:3000/images/fblogo.png">
+<img id="secret-logo" src="http://localhost:3000/images/fblogo.png">
+<div id="lastframe"></div>
+<img id="database-logo" src="http://localhost:3000/images/database.png">
+<!--<embed src="http://localhost:3000/images/fbanim.swf" width="400" height="400"></embed>-->
+
 
 <!--Start Button-->
 <button id="startButton" class="ui button" color="positive">Start</button>
 
 <!--TYPED MESSAGE-->
 <div class="ui horizontal divider alexa-speech"><span id="myelement" style="color: #1D2C4B"></span></div>
+

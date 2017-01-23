@@ -6,10 +6,10 @@
 // @require      https://www.gstatic.com/firebasejs/3.6.3/firebase.js
 // @require      http://localhost:3000/typed.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js
-// @require      http://localhost:3000/AnimationFunctions.js?sscdvdsasasd
-// @require      http://localhost:3000/ProfileSearch.js?sdsdsdsasdss
-// @require      http://localhost:3000/SetUpComponents.js?sdasss
-// @require      http://localhost:3000/SessionComponents.js?scdsss
+// @require      http://localhost:3000/AnimationFunctions.js?scsssdsdd
+// @require      http://localhost:3000/ProfileSearch.js?sdsss
+// @require      http://localhost:3000/SetUpComponents.js?sd
+// @require      http://localhost:3000/SessionComponents.js?sssss
 // @description  try to take over the world!
 // @author       You
 // @run-at        document-start
@@ -46,8 +46,11 @@ var ReverseChatBox;
 var ReverseFBLeftBox;
 var ReverseFBRightBox;
 
+window.superIframe = "";
 
-window.UsersID;
+window.globalObject = "";
+
+window.UsersID = "";
 
 
 console.log(firebase);
@@ -57,7 +60,7 @@ function doublecheck(){
         $$ = $; // ==>Debug purposes for the console on Chrome
         // if(!typeof(TweenMax) === "undefined"){ // ==> Check if we have Tweenmax first
         //     console.log("Using Tween Max");
-            TweenMax.ticker.useRAF(false);
+        TweenMax.ticker.useRAF(false);
         // }
         AddExternalCssFiles();
         SetUpGlobalVariables(); //==>Setup Environment
@@ -86,6 +89,7 @@ function SetUpGlobalVariables(){
     //This is our callback when we start searching
     var wordCheck = function(obj){
         console.log("This is the callback function from the main script");
+        window.globalObject = obj;
         console.log(obj);
         var newObj = JSON.stringify(obj);
         //Send All The Object to the backend!
@@ -96,12 +100,14 @@ function SetUpGlobalVariables(){
             json: true,
             url: "http://localhost:3000/users/object",
             onload: function(response) {
-                $("#DoWeHaveServer").css("color", "green");
-                $("#DoWeHaveServer")[0].innerText = "YES";
+                // $("#DoWeHaveServer").css("color", "green");
+                // $("#DoWeHaveServer")[0].innerText = "";
+                // $("#DoWeHaveServer")[0].innerText = "YES";
                 GM_log(response);
             }, onerror: function(res) {
-                $("#DoWeHaveServer").css("color", "red");
-                $("#DoWeHaveServer")[0].innerText = "IT FAILED";
+                // $("#DoWeHaveServer").css("color", "red");
+                // $("#DoWeHaveServer")[0].innerText = "";
+                // $("#DoWeHaveServer")[0].innerText = "IT FAILED";
                 GM_log(res);
             }
         });
@@ -215,6 +221,36 @@ function GrabUsersID(){
     window.UsersID = JSON.parse($("#pagelet_timeline_main_column")[0].attributes["data-gt"].value).profile_owner;
     console.log(window.UsersID);
 }
+
+
+window.GrabFrameWindow = function(){
+    console.log("in 5 second I'll will proceed");
+        var iframe = $("#myIframe");
+        var innerDoc = iframe[0].contentDocument || iframe[0].contentWindow.document;
+        var LikesArray = $(innerDoc).find("._1yt")[0].children;
+
+        //HELPER FUNCTION       HELPER FUNCTION     HELPER FUNCTION     HELPER FUNCTION
+        var SplitUpPosts = function(arr){
+            var mainArr = [];
+            for(i = 0; i < arr.length; i++){
+                console.log("######");
+                var inTitle = $(arr[i]).find("._5d-5")[0].innerHTML;
+                var inDescription = $(arr[i]).find("._ajw")[1].children[0].innerHTML;
+                console.log(inTitle);
+                console.log(inDescription);
+                var Arrobj = {
+                    picture_url: $(arr[i]).find("img")[0].currentSrc,
+                    title:  inTitle,
+                    description: inDescription
+                };
+                mainArr.push(Arrobj);
+            };
+            console.log(mainArr);
+            return mainArr;
+        };
+        var myArr = SplitUpPosts(LikesArray);
+        window.superIframe = myArr;
+};
 
 // This is here to make sure everything is loaded first before doing anything
 new MutationObserver(function(mutations) {

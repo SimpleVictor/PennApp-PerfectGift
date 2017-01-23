@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var fs = require('fs');
+var Jason = require('../jason/dataParse');
+// var BeautifulObj = require('../jason/BeautifulObject.json');
+
+
 
 
 //this is nothing for now...
@@ -30,7 +34,6 @@ router.post('/object', function(req, res, next) {
 
 router.post('/info', function(req, res, next){
 
-
     console.log(req.body);
 
     //Generates the className for each Icon
@@ -46,14 +49,27 @@ router.post('/info', function(req, res, next){
 
 });
 
-//Send Blob Or File to Firebase
-router.post('/blob', function(req, res, next) {
-    console.log("Send Blob to Firebase");
+
+//AMAZON
+
+router.post('/amazon', function(req, res, next) {
+    console.log("Just called this function");
     console.log(req.body);
-    var obj = {
-        message: "we received your blob"
-    };
-    res.json(obj);
+
+    //Write to the file
+    var content = JSON.stringify(req.body);
+    fs.writeFile("../Server/jason/BeautifulObject.json", content, function(err) {
+        if(err) {
+            return console.log(err);
+        }
+        console.log("The file was saved!");
+        // setTimeout(function(){
+
+            Jason.DataParse(function(amazon){
+                res.json(amazon);
+            });
+        // }, 2000);
+    });
 });
 
 module.exports = router;
